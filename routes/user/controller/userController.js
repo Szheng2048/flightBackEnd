@@ -3,13 +3,13 @@ const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
 
 
-const {isEmpty} = require("../../utils/authMethods")
+const {isEmptyf} = require("../../utils/authMethods")
 
 
 async function signUp (req,res,next){
     const {username,email,firstName,lastName,password}= req.body
     const {errorObj} = res.locals
-    if(!isEmpty(Object.keys(errorObj)))//grab everything in error obj and check if empty
+    if(!isEmptyf(Object.keys(errorObj)))//grab everything in error obj and check if empty
     {
         return res.status(500).json({message:"error",errorObj})
     }
@@ -38,19 +38,20 @@ async function signin(req,res,next){
     }
 
     try {
-        const foundUserByEmail = await User.findOne({email: user})
-        const foundUserByUserName = await User.findOne({username : user})
-        if(!foundUserByEmail && !foundUserByUserName){
+        let foundUser
+        let comparedPassword
+        foundUser = await User.findOne({email: user})
+        if(!foundUser){
+            foundUser = await User.findOne({username : user})
+        }
+        if(!foundUser){
             return res.status(400).json({message:"failed please check username or email and password"})
         } else {
-            let comparedPassword
-            if(foundUserByEmail){
-                comparedPassword = await bcrypt.compare(password, foundUserByEmail.password)
-            } else {
-                comparedPassword = await bcrypt.compare(password, foundUserByUserName.password)
+            if(foundUser){
+                comparedPassword = await bcrypt.compare(password, foundUser.password)
             }
             if(!comparedPassword){
-                return res.json({message:"failed please check username or email and password"})
+                return res.status(500).json({message:"failed please check username or email and password"})
             } else {
                 const jwtToken = jwt.sign(
                     {

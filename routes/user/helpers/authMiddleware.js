@@ -1,22 +1,21 @@
 const {
-    isEmail,
-    isAlpha,
-    isAlphanumeric, 
-    isStrongPassword
+    isEmailf,
+    isAlphaf,
+    isAlphanumericf, 
+    isStrongPasswordf
 } = require("../../utils/authMethods")
 
 function checkIsEmailFunc(req,res,next){
     const {errorObj} = res.locals
-    if(!isEmail(req.body.email)){
+    if(!isEmailf(req.body.email)){
         errorObj.wrongEmailFormat = "Must be a valid email"
-        console.log("hello")
     }
     next()
 }
 
 function checkIsStrongPasswordFunc(req,res,next){
     const {errorObj} = res.locals
-    if(!isStrongPassword(req.body.password)){
+    if(!isStrongPasswordf(req.body.password)){
         errorObj.validPassword = "Password must contain 8 chars, 1 uppercase,1 lowercase, and a nonalphanumeric symbol"
     }
     next()
@@ -24,7 +23,7 @@ function checkIsStrongPasswordFunc(req,res,next){
 
 function checkIsValidFirstNameFunc(req,res,next){
     const {errorObj} = res.locals
-    if(!isAlpha(req.body.firstName)){
+    if(!isAlphaf(req.body.firstName)){
         errorObj.validFirstName = "First name must only consist of letters"
     }
     next()
@@ -32,7 +31,7 @@ function checkIsValidFirstNameFunc(req,res,next){
 
 function checkIsValidLastNameFunc(req,res,next){
     const {errorObj} =res.locals
-    if(!isAlpha(req.body.lastName)){
+    if(!isAlphaf(req.body.lastName)){
         errorObj.validLastName = "LastName must consists of letters only"
     }
     next()
@@ -40,7 +39,7 @@ function checkIsValidLastNameFunc(req,res,next){
 
 function checkIsValidUsername(req,res,next){
     const {errorObj} = res.locals
-    if(!isAlphanumeric(req.body.username)){
+    if(!isAlphanumericf(req.body.username)){
         errorObj.validUsername = "This Username is not valid"
     }
     next()

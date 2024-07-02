@@ -1,39 +1,39 @@
-const {isEmpty,isAlpha,isEmail,isAlphanumeric,isStrongPassword} = require("validator")
+const {isAlpha,isEmail,isAlphanumeric,isStrongPassword} = require("validator")
 
 /**
  * Checks if a given string is empty.
  */
-function isEmpty(str) {
-    return isEmpty(str)
+function isEmptyf(str) {
+    return str.length === 0
 }
 
 /**
  * Checks if a given string meets the criteria of a strong password.
  */
-function isStrongPassword(password) {
+function isStrongPasswordf(password) {
     return isStrongPassword(password)
     // Implementation here
 }
 
 
-function isEmail(email) {
+function isEmailf(email) {
     return isEmail(email)
 }
 
 
 
-function isAlpha(str) {
+function isAlphaf(str) {
     return isAlpha(str)
 }
-function isAlphanumeric(str) {
+function isAlphanumericf(str) {
     // Implementation here
     return isAlphanumeric(str)
 }
 
 module.exports = {
-    isEmail,
-    isEmpty,
-    isAlpha,
-    isAlphanumeric, 
-    isStrongPassword
+    isEmailf,
+    isEmptyf,
+    isAlphaf,
+    isAlphanumericf, 
+    isStrongPasswordf
 }

@@ -1,11 +1,11 @@
-const { isEmpty } = require("../../utils/authMethods");
+const { isEmptyf } = require("../../utils/authMethods");
 
 function checkIsEmptyFunc(req,res,next){
     const errorObj = {}
     const incomingData = req.body
 
     for(let key in incomingData){
-        if(isEmpty(incomingData[key])){
+        if(isEmptyf(incomingData[key])){
             errorObj[key] = `${key} cannot be empty`
         }
     }
